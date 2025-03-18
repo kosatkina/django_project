@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block scripts %}
+{% endblock scripts %}
+
+{% block title %}
+{% endblock title %}
+
+{% block content %}
+{% for obj in qs %}
+    {{obj.title}} - {{obj.body}} <br>
+{% endfor %}
+{% endblock content %}
