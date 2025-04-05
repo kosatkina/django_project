@@ -33,6 +33,13 @@ const getCoockie = (name) => {
 }
 const csrftoken = getCoockie('csrftoken');
 
+// Display notification that post has been deleted
+const deleted = localStorage.getItem('title')
+if (deleted) {
+    handleAlerts('danger', `Deleted "${deleted}"`)
+    localStorage.clear()
+}
+
 const likeUnlikePosts = () => {
     const likeUnlikeForms = [...document.getElementsByClassName('like-unlike-forms')];
     likeUnlikeForms.forEach(form=> form.addEventListener('submit', e=> {
