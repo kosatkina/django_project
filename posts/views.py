@@ -14,9 +14,16 @@ def post_list_and_create(request):
     if request.headers.get('x-requested-with') == 'XMLHttpRequest':
         if form.is_valid():
             author = Profile.objects.get(user=request.user)
-            isinstance = form.save(commit=False)
-            isinstance.author = author
-            isinstance.save()
+            instance = form.save(commit=False)
+            instance.author = author
+            instance.save()
+            
+            return JsonResponse({
+                'title': instance.title,
+                'body': instance.body,
+                'author': instance.author.user.username,
+                'id': instance.id,
+            })
     
     context = {
         'form': form,

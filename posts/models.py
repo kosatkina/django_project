@@ -18,3 +18,7 @@ class Post(models.Model):
     @property 
     def like_count(self) :
         return self.liked.all().count()
+    
+    # To display posts in descending order
+    class Meta:
+        ordering = ("-created",)
