@@ -10,6 +10,9 @@ const postForm = document.getElementById('post-form')
 const title = document.getElementById('id_title')
 const body = document.getElementById('id_body')
 const csrf = document.getElementsByName('csrfmiddlewaretoken')
+
+const alertBox = document.getElementById('alert-box')
+
 console.log('csrf: ', csrf[0].value)
 
 const getCoockie = (name) => {
@@ -141,16 +144,22 @@ postForm.addEventListener('submit', e => {
                                 </div>
                                 <div class="col-2">
                                     <form class="like-unlike-forms" data-form-id="${response.id}">
-                                        <button href="#" class="btn btn-primary" id="like-unlike-${response.id}">Like</button>
+                                        <button href="#" class="btn btn-primary" id="like-unlike-${response.id}">Like (0)</button>
                                     </form>
                                 </div>
                             </div>
                         </div>
                     </div>
                 `)
+                likeUnlikePosts()
+                // Hide modal authomatically and notify that new post was created
+                $('#addPostModal').modal('hide')
+                handleAlerts('success', 'New post added!')
+
         },
         error: function(error) {
             console.log(error)
+            handleAlerts('danger', 'Oops... something went wrong')
         }
     })
 })
