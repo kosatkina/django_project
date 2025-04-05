@@ -31,6 +31,7 @@ def post_list_and_create(request):
     
     return render(request, 'posts/main.html', context)
 
+
 def post_detail(request, pk):
     obj = Post.objects.get(pk=pk)
     form = PostForm()
@@ -41,6 +42,7 @@ def post_detail(request, pk):
     }
 
     return render(request, 'posts/detail.html', context)
+
 
 def load_post_data_view(request, num_posts):
     
@@ -65,6 +67,19 @@ def load_post_data_view(request, num_posts):
             }
             data.append(item)
         return JsonResponse({'data': data[lower:upper], 'size': size})
+
+
+def post_detail_data_view(request, pk):
+    obj = Post.objects.get(pk=pk)
+    data = {
+        'id': obj.id,
+        'title': obj.title,
+        'body': obj.body,
+        'author': obj.author.user.username,
+        'logged_in': request.user.username,
+    }
+    return JsonResponse({'data': data})
+
 
 def like_unlike_post(request):
     # Deprecated function .is_ajax() changed
