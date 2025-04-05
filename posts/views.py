@@ -106,10 +106,10 @@ def update_post(request, pk):
         obj.body = new_body
         obj.save()
 
-    return JsonResponse({
-        'title': new_title,
-        'body': new_body,
-    })
+        return JsonResponse({
+            'title': new_title,
+            'body': new_body,
+        })
 
 
 def delete_post(request, pk):
