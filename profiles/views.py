@@ -12,7 +12,7 @@ def my_profile_view(request):
         if form.is_valid():
             instance = form.save()
             return JsonResponse({
-                'bio': instance.bio,
+                'bop': instance.bop,
                 'avatar': instance.avatar.url,
                 'user': instance.user.username
             })
