@@ -53,6 +53,29 @@ $.ajax({
         postBox.appendChild(titleEl)
         postBox.appendChild(bodyEl)
 
+        // Display author
+        const authorEl = document.createElement('p')
+        authorEl.setAttribute('class', 'mt-3')
+        authorEl.textContent = `Author: ${data.author}`
+        postBox.appendChild(authorEl)
+
+        // Display who liked the post
+        const likesEl = document.createElement('p')
+        likesEl.setAttribute('class', 'text-muted')
+
+        const likes = data.liked_by
+        const totalLikes = likes.length
+        if(totalLikes === 0) {
+            likesEl.textContent = 'No likes yet'
+        } else if(totalLikes === 1) {
+            likesEl.textContent = `Liked by: ${likes[0]}`
+        } else if(totalLikes === 2) {
+            likesEl.textContent = `Liked by: ${likes[0]} and ${likes[1]}`
+        } else {
+            likesEl.textContent = `Liked by: ${likes[0]}, ${likes[1]} and ${totalLikes - 2} others`
+        }
+        postBox.appendChild(likesEl)
+
         // Put post data in the update modal
         titleInput.value = data.title
         bodyInput.value = data.body
