@@ -3,6 +3,7 @@ from .models import Profile
 from .forms import ProfileForm
 from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.views import LoginView
 
 # Create your views here.
 
@@ -26,3 +27,11 @@ def my_profile_view(request):
 
     return render(request, 'profiles/main.html', context)
 
+class CustomLoginView(LoginView):
+    template_name = 'posts/login.html'
+
+    def get_success_url(self):
+        user = self.request.user
+        if user.is_staff or user.is_superuser:
+            return '/admin/'  
+        return '/'
